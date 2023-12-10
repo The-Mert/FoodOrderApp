@@ -57,7 +57,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartRv"
         android:layout_width="0dp"
-        android:layout_height="300dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="64dp"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"

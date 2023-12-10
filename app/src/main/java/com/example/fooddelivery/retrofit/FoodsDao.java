@@ -35,4 +35,9 @@ public interface FoodsDao {
     @FormUrlEncoded
     Call<CartFoodsAnswer> showCart(@Field("kullanici_adi") String kullanici_adi);
 
+    @POST("yemekler/sepettenYemekSil.php")
+    @FormUrlEncoded
+    Call<CRUDanswer> delete(@Field("sepet_yemek_id") int sepet_yemek_id,
+                         @Field("kullanici_adi") String kullanici_adi);
+
 }

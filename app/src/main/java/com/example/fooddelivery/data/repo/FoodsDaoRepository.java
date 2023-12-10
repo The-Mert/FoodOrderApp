@@ -103,6 +103,20 @@ public class FoodsDaoRepository {
         });
     }
 
+    public void delete(int sepet_yemek_id,String kullanici_adi){
+        fdao.delete(sepet_yemek_id,kullanici_adi).enqueue(new Callback<CRUDanswer>() {
+            @Override
+            public void onResponse(Call<CRUDanswer> call, Response<CRUDanswer> response) {
+                showCartRv("mert_yazici");
+            }
+
+            @Override
+            public void onFailure(Call<CRUDanswer> call, Throwable t) {
+
+            }
+        });
+    }
+
 
 
 

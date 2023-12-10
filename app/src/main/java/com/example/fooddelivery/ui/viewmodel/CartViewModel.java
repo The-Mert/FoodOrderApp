@@ -31,6 +31,10 @@ public class CartViewModel  extends ViewModel {
 
     }
 
+    public void delete(int sepet_yemek_id,String kullanici_adi){
+        fdao.delete(sepet_yemek_id,kullanici_adi);
+    }
+
 
 
 
