@@ -4,7 +4,10 @@ package com.example.fooddelivery.ui.fragment;
 import android.os.Bundle;
 
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -17,16 +20,22 @@ import android.view.WindowManager;
 import android.widget.SearchView;
 
 
+import com.example.fooddelivery.R;
 import com.example.fooddelivery.data.entity.Foods;
 import com.example.fooddelivery.data.entity.Recommended;
 import com.example.fooddelivery.databinding.FragmentMainPageBinding;
 import com.example.fooddelivery.ui.adapter.OrdersAdapter;
 import com.example.fooddelivery.ui.adapter.RecommendedAdapter;
+import com.example.fooddelivery.ui.viewmodel.MainPageViewModel;
 
 import java.util.ArrayList;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class MainPageFragment extends Fragment {
     private FragmentMainPageBinding binding;
+    private MainPageViewModel viewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,44 +44,60 @@ public class MainPageFragment extends Fragment {
 
 
 
-//        binding.recommendedRv.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.HORIZONTAL));
-//
-//        ArrayList<Recommended> recommendedArrayList = new ArrayList<>();
-//        Recommended r1 = new Recommended(1,72,"Ayran","80 ₺" ,"0", "0", "4,5", "Beverages");
-//        Recommended r2 = new Recommended(2,22,"Fanta","10 ₺" ,"0", "0", "3,5", "Beverages");
-//        Recommended r3 = new Recommended(3,22,"Fanta","10 ₺" ,"0", "0", "3,5", "Beverages");
-//        Recommended r4 = new Recommended(4,22,"Fanta","10 ₺" ,"0", "0", "3,5", "Beverages");
-//        recommendedArrayList.add(r1);
-//        recommendedArrayList.add(r2);
-//        recommendedArrayList.add(r3);
-//        recommendedArrayList.add(r4);
-//        RecommendedAdapter adapter = new RecommendedAdapter(recommendedArrayList,requireContext());
-//        binding.recommendedRv.setAdapter(adapter);
 
-//        binding.orderRv.setLayoutManager(new LinearLayoutManager(requireContext()));
-//
-//        ArrayList<Foods> foodsArrayList = new ArrayList<>();
-//        Foods f1 = new Foods(1,"Ayran","8 ₺","Beverages","3");
-//        Foods f2 = new Foods(2,"Fanta","","12 ₺","Beverages","3");
-//        Foods f3 = new Foods(3,"Balık","4 ₺","Beverages","3");
-//        Foods f4 = new Foods(4,"Et","5 ₺","Beverages","4");
-//        foodsArrayList.add(f1);
-//        foodsArrayList.add(f2);
-//        foodsArrayList.add(f3);
-//        foodsArrayList.add(f4);
-//        OrdersAdapter adapter1 = new OrdersAdapter(foodsArrayList,requireContext());
-//        binding.orderRv.setAdapter(adapter1);
+        //Recommended RV
+        binding.recommendedRv.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.HORIZONTAL));
+
+        viewModel.recommendedList.observe(getViewLifecycleOwner(),recommendedList -> {
+            RecommendedAdapter adapter = new RecommendedAdapter(recommendedList,requireContext(),viewModel);
+            binding.recommendedRv.setAdapter(adapter);
+        });
+        //-------------------
+
+        //Orders Now RV
+        binding.orderRv.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+        viewModel.ordersList.observe(getViewLifecycleOwner(),ordersList -> {
+            OrdersAdapter adapter1 = new OrdersAdapter(ordersList,requireContext(),viewModel);
+            binding.orderRv.setAdapter(adapter1);
+        });
+        // ------------------
+
+        binding.buttonCartPage.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.pathMainToCart);
+        });
+
+//        binding.imageButtonLogOut.setOnClickListener(v -> {
+//            Foods foods = new Foods();
+//            String yemek_adi = foods.getYemek_adi();
+//            String yemek_resim_adi = foods.getYemek_resim_adi();
+//            int yemek_fiyat = foods.getYemek_fiyat();
+////            String yemek_siparis_str = m.textViewAmountMainPage.getText().toString();
+//            int yemek_siparis_adet = 1;
+//            String kullanici_adi = "merty";
+//            viewModel.addCart("Ayran","ayran.png",3,1,"mert_yazici");
+//        });
+
 
         Window w = getActivity().getWindow();
         w.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        w.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        w.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);    //Hide Nav And Status Bar
         w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         return binding.getRoot();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(MainPageViewModel.class);
+    }
 
-
-    public void search(String searchKey){
-        Log.e("S","asda");
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.showOrderNow();
+//        viewModel.showRecommended();
     }
 }

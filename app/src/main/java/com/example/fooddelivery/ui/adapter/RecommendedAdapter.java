@@ -10,16 +10,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fooddelivery.data.entity.Recommended;
 import com.example.fooddelivery.databinding.RecommendCardBinding;
+import com.example.fooddelivery.ui.viewmodel.MainPageViewModel;
 
 import java.util.List;
 
 public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.CardDesignHolding>{
     private List<Recommended> recommendedList;
     private Context context;
+    private MainPageViewModel viewModel;
 
-    public RecommendedAdapter(List<Recommended> recommendedList, Context context) {
+    public RecommendedAdapter(List<Recommended> recommendedList, Context context, MainPageViewModel viewModel) {
         this.recommendedList = recommendedList;
         this.context = context;
+        this.viewModel = viewModel;
     }
 
     @NonNull

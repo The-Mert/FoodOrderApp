@@ -9,7 +9,14 @@
         android:id="@+id/mainPageFragment"
         android:name="com.example.fooddelivery.ui.fragment.MainPageFragment"
         android:label="fragment_main_page"
-        tools:layout="@layout/fragment_main_page" />
+        tools:layout="@layout/fragment_main_page" >
+        <action
+            android:id="@+id/pathMainToCart"
+            app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/pathDetails"
+            app:destination="@id/detailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/logInFragment"
         android:name="com.example.fooddelivery.ui.fragment.LogInFragment"
@@ -42,6 +49,9 @@
         <action
             android:id="@+id/pathDetailsToCart"
             app:destination="@id/cartFragment" />
+        <argument
+            android:name="food"
+            app:argType="com.example.fooddelivery.data.entity.Foods" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"

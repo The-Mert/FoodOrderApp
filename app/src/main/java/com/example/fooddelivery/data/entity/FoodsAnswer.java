@@ -3,23 +3,23 @@ package com.example.fooddelivery.data.entity;
 import java.util.List;
 
 public class FoodsAnswer {
-    private List<Foods> foods;
+    private List<Foods> yemekler;
     private int success;
 
     public FoodsAnswer() {
     }
 
-    public FoodsAnswer(List<Foods> foods, int success) {
-        this.foods = foods;
+    public FoodsAnswer(List<Foods> yemekler, int success) {
+        this.yemekler = yemekler;
         this.success = success;
     }
 
-    public List<Foods> getFoods() {
-        return foods;
+    public List<Foods> getYemekler() {
+        return yemekler;
     }
 
-    public void setFoods(List<Foods> foods) {
-        this.foods = foods;
+    public void setYemekler(List<Foods> yemekler) {
+        this.yemekler = yemekler;
     }
 
     public int getSuccess() {

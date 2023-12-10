@@ -93,10 +93,10 @@
                 android:layout_marginBottom="16dp"
                 android:text="2"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageButtonAddMainPage" />
+                app:layout_constraintEnd_toStartOf="@+id/imageButtonIncreaseMainPage" />
 
             <ImageButton
-                android:id="@+id/imageButtonAddMainPage"
+                android:id="@+id/imageButtonIncreaseMainPage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:backgroundTint="#FFFFFF"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButtonAddMainPage"
+                app:layout_constraintBottom_toBottomOf="@+id/imageButtonIncreaseMainPage"
                 app:layout_constraintEnd_toStartOf="@+id/textViewAmountMainPage"
                 app:srcCompat="@drawable/minus" />
 
@@ -121,8 +121,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/login_signup"
-                app:layout_constraintBottom_toTopOf="@+id/imageButtonAddMainPage"
-                app:layout_constraintEnd_toEndOf="@+id/imageButtonAddMainPage"
+                app:layout_constraintBottom_toTopOf="@+id/imageButtonIncreaseMainPage"
+                app:layout_constraintEnd_toEndOf="@+id/imageButtonIncreaseMainPage"
                 app:srcCompat="@drawable/cart" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

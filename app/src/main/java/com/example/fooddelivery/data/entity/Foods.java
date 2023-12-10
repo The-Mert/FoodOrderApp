@@ -1,73 +1,62 @@
 package com.example.fooddelivery.data.entity;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 
-public class Foods {
-    private int food_id;
-    private String food_name;
-    private String food_img;
-    private String food_price;
+public class Foods implements Serializable{
 
-    private String food_type;
+    private int yemek_id;
 
-    private String cart_amount;
+    private String yemek_adi;
+
+    private String yemek_resim_adi;
+
+    private int yemek_fiyat;
+
+
     public Foods() {
     }
 
-    public Foods(int food_id, String food_name,String food_img, String food_price, String food_type, String cart_amount) {
-        this.food_id = food_id;
-        this.food_name = food_name;
-        this.food_price = food_price;
-        this.food_type = food_type;
-        this.cart_amount = cart_amount;
-        this.food_img = food_img;
+    public Foods(int yemek_id, String yemek_adi, String yemek_resim_adi, int yemek_fiyat) {
+        this.yemek_id = yemek_id;
+        this.yemek_adi = yemek_adi;
+        this.yemek_resim_adi = yemek_resim_adi;
+        this.yemek_fiyat = yemek_fiyat;
     }
 
-    public int getFood_id() {
-        return food_id;
+    public int getYemek_id() {
+        return yemek_id;
     }
 
-    public void setFood_id(int food_id) {
-        this.food_id = food_id;
+    public void setYemek_id(int yemek_id) {
+        this.yemek_id = yemek_id;
     }
 
-    public String getFood_name() {
-        return food_name;
+    public String getYemek_adi() {
+        return yemek_adi;
     }
 
-    public void setFood_name(String food_name) {
-        this.food_name = food_name;
+    public void setYemek_adi(String yemek_adi) {
+        this.yemek_adi = yemek_adi;
     }
 
-    public String getFood_img() {
-        return food_img;
+    public String getYemek_resim_adi() {
+        return yemek_resim_adi;
     }
 
-    public void setFood_img(String food_img) {
-        this.food_img = food_img;
+    public void setYemek_resim_adi(String yemek_resim_adi) {
+        this.yemek_resim_adi = yemek_resim_adi;
     }
 
-    public String getFood_price() {
-        return food_price;
+    public int getYemek_fiyat() {
+        return yemek_fiyat;
     }
 
-    public void setFood_price(String food_price) {
-        this.food_price = food_price;
-    }
-
-    public String getFood_type() {
-        return food_type;
-    }
-
-    public void setFood_type(String food_type) {
-        this.food_type = food_type;
-    }
-
-    public String getCart_amount() {
-        return cart_amount;
-    }
-
-    public void setCart_amount(String cart_amount) {
-        this.cart_amount = cart_amount;
+    public void setYemek_fiyat(int yemek_fiyat) {
+        this.yemek_fiyat = yemek_fiyat;
     }
 }
