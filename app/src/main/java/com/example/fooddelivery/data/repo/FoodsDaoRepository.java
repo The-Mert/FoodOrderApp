@@ -93,7 +93,7 @@ public class FoodsDaoRepository {
                 List<CartFoods> cartFoodsList = response.body().getSepet_yemekler();   // Sorun buradaaaaaaaaaaaaaaaaaa   cartFoodsList null dönüyor sebebi ne acaba
                 cartFoods.setValue(cartFoodsList);
                 CartFoods foods = new CartFoods();
-                Log.e("onResumeKontrol: ",""+foods.getYemek_adi()+"Çalıştı");
+
             }
 
             @Override
@@ -119,22 +119,6 @@ public class FoodsDaoRepository {
 
 
 
-
-
-//    public void showFoods(){
-//        fdao.showFoods().enqueue(new Callback<FoodsAnswer>() {
-//            @Override
-//            public void onResponse(Call<FoodsAnswer> call, Response<FoodsAnswer> response) {
-//                List<Foods> foodsList = response.body().getFoods();
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<FoodsAnswer> call, Throwable t) {
-//
-//            }
-//        });
-//    }
 
 
 //    public void search(String searchKey){

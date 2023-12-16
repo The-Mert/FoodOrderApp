@@ -16,6 +16,9 @@
         <action
             android:id="@+id/pathDetails"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/pathFromMainToLogin"
+            app:destination="@id/logInFragment" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
@@ -52,6 +55,9 @@
         <argument
             android:name="food"
             app:argType="com.example.fooddelivery.data.entity.Foods" />
+        <action
+            android:id="@+id/action_detailsFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -61,6 +67,9 @@
         <action
             android:id="@+id/action_cartFragment_to_paymentFragment"
             app:destination="@id/paymentFragment" />
+        <action
+            android:id="@+id/backFromCartToMain"
+            app:destination="@id/mainPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/paymentFragment"

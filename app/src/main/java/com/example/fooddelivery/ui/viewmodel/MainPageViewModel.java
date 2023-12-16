@@ -40,6 +40,10 @@ public class MainPageViewModel extends ViewModel {
         fdao.addCart(yemek_adi, yemek_resim_adi, yemek_fiyat, yemek_siparis_adet, kullanici_adi);
     }
 
+    public void showCartRv(String kullanici_adi){
+        fdao.showCartRv(kullanici_adi);
+
+    }
 
 
 

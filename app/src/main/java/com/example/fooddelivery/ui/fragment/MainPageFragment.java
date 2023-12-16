@@ -21,9 +21,11 @@ import android.widget.SearchView;
 
 
 import com.example.fooddelivery.R;
+import com.example.fooddelivery.data.entity.CartFoods;
 import com.example.fooddelivery.data.entity.Foods;
 import com.example.fooddelivery.data.entity.Recommended;
 import com.example.fooddelivery.databinding.FragmentMainPageBinding;
+import com.example.fooddelivery.ui.adapter.CartAdapter;
 import com.example.fooddelivery.ui.adapter.OrdersAdapter;
 import com.example.fooddelivery.ui.adapter.RecommendedAdapter;
 import com.example.fooddelivery.ui.viewmodel.MainPageViewModel;
@@ -36,13 +38,16 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class MainPageFragment extends Fragment {
     private FragmentMainPageBinding binding;
     private MainPageViewModel viewModel;
+    private int amount;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentMainPageBinding.inflate(inflater,container,false);
 
-
+        CartFragment fragment = new CartFragment();
+        String total = fragment.priceToMain.getValue();
+        Log.e("totalPrice:", total);
 
 
         //Recommended RV
@@ -51,6 +56,9 @@ public class MainPageFragment extends Fragment {
         viewModel.recommendedList.observe(getViewLifecycleOwner(),recommendedList -> {
             RecommendedAdapter adapter = new RecommendedAdapter(recommendedList,requireContext(),viewModel);
             binding.recommendedRv.setAdapter(adapter);
+
+
+
         });
         //-------------------
 
@@ -60,23 +68,26 @@ public class MainPageFragment extends Fragment {
         viewModel.ordersList.observe(getViewLifecycleOwner(),ordersList -> {
             OrdersAdapter adapter1 = new OrdersAdapter(ordersList,requireContext(),viewModel);
             binding.orderRv.setAdapter(adapter1);
+            int sum_price = 0;
+            adapter1.amount.observe(getViewLifecycleOwner(),s->{
+                this.amount = s;
+            });
+            for (Foods orderFoods : ordersList) {
+                sum_price += (orderFoods.getYemek_fiyat() * this.amount);
+            }
+            binding.buttonCartPage.setText(String.valueOf(sum_price));
         });
         // ------------------
+
 
         binding.buttonCartPage.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.pathMainToCart);
         });
 
-//        binding.imageButtonLogOut.setOnClickListener(v -> {
-//            Foods foods = new Foods();
-//            String yemek_adi = foods.getYemek_adi();
-//            String yemek_resim_adi = foods.getYemek_resim_adi();
-//            int yemek_fiyat = foods.getYemek_fiyat();
-////            String yemek_siparis_str = m.textViewAmountMainPage.getText().toString();
-//            int yemek_siparis_adet = 1;
-//            String kullanici_adi = "merty";
-//            viewModel.addCart("Ayran","ayran.png",3,1,"mert_yazici");
-//        });
+        binding.imageButtonLogOut.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.pathFromMainToLogin);
+        });
+
 
 
         Window w = getActivity().getWindow();

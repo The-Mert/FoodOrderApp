@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,7 +28,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MainMenuCa
     private Context context;
     private MainPageViewModel viewModel;
 
+    public MutableLiveData<Integer> amount = new MutableLiveData<>(0);
 
+
+
+    public OrdersAdapter() {
+    }
 
     public OrdersAdapter(List<Foods> foodsList, Context context, MainPageViewModel viewModel) {
         this.foodsList = foodsList;
@@ -104,12 +110,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MainMenuCa
             int yemek_siparis_adet = Integer.parseInt(yemek_siparis_str);
             String kullanici_adi = "mert_yazici";
 
+            amount.setValue(yemek_siparis_adet);
 
             viewModel.addCart(yemek_adi,yemek_resim_adi,yemek_fiyat,yemek_siparis_adet,kullanici_adi);
-            Log.e("Kontrol: " , foods.getYemek_adi()+"");
+
         });
         //-----------
-
 
         m.imageViewFoodMainPage.setOnClickListener(v -> {       // Path to Details Fragment
             MainPageFragmentDirections.PathDetails pathDetails = MainPageFragmentDirections.pathDetails(foods);
@@ -117,10 +123,6 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MainMenuCa
 
         });
 
-
-
-
-//        m.imageViewFoodMainPage.setImageResource();
     }
 
     @Override

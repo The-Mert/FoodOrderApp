@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "808568667855",
+    "project_id": "bitirmeproject-fe278",
+    "storage_bucket": "bitirmeproject-fe278.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:808568667855:android:2ce2a044bc7a928b9a81ba",
+        "android_client_info": {
+          "package_name": "com.example.fooddelivery"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBT9J6W5gWJXQl58Wz3bOVbqb8tst_uXOc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

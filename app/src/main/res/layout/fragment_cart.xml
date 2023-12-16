@@ -62,16 +62,16 @@
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainPageSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/mapView" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:text="TextView"
+        android:text="TOTAL"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTotal"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -91,17 +91,25 @@
         android:layout_marginBottom="32dp"
         android:text="10 ₺"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
-        app:layout_constraintEnd_toEndOf="@+id/textView4" />
+        app:layout_constraintBottom_toTopOf="@+id/textViewTotal"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTotal" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textViewTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="24dp"
-        android:text="100₺"
+        android:text="0₺"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonCartPage2"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainPageSearch" />
 </androidx.constraintlayout.widget.ConstraintLayout>
