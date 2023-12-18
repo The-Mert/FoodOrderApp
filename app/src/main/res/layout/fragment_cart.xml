@@ -59,7 +59,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="64dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDeliveryText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mapView" />
@@ -75,7 +75,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewDeliveryText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
@@ -85,7 +85,7 @@
         app:layout_constraintStart_toStartOf="@+id/textView" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewDeliveryPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
@@ -112,4 +112,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainPageSearch" />
+
+    <Button
+        android:id="@+id/deleteAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete All"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/cartRv"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

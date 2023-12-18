@@ -1,5 +1,6 @@
 package com.example.fooddelivery.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,14 +20,20 @@ import com.example.fooddelivery.ui.viewmodel.CartViewModel;
 import com.example.fooddelivery.ui.viewmodel.MainPageViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartMenuCardHolding>{
     private List<CartFoods> cartFoodsList;
+
+    private List<CartFoods> filterCartFoods;
     private Context context;
     public MutableLiveData<Boolean> isEmpty = new MutableLiveData<>(false);
+
+    public MutableLiveData<String> itemAmount = new MutableLiveData<>("0");
 
     private CartViewModel viewModelCart;
 
@@ -36,6 +43,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartMenuCardHo
         this.cartFoodsList = cartFoodsList;
         this.context = context;
         this.viewModelCart = viewModelCart;
+        this.filterCartFoods = new ArrayList<>(cartFoodsList);
     }
 
     @NonNull
@@ -49,6 +57,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartMenuCardHo
     public void onBindViewHolder(@NonNull CartMenuCardHolding holder, int position) {
         CartFoods cartFoods = cartFoodsList.get(position);
         CartRvBinding c = holder.bindingCart;
+        List<String> controlList = new ArrayList<String>();
+        controlList.add(cartFoods.getYemek_adi());
+//        if (controlList.contains("Ayran")){
+//            c.textViewPriceCartPage.setVisibility(View.GONE);
+//        }else{
+//
+//        }
+//        if (controlList.contains("Ayran")){}
+
+
+        Log.e("positionss:", controlList.contains("Ayran")+" "+controlList+ " "+ cartFoods.getYemek_adi());
 
 
         //Image Resource
@@ -92,18 +111,37 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartMenuCardHo
 
     }
 
-//    @Override
-//    public long getItemId(int position, String object) {
-//        if(object==){
-//
-//        }
-//        return position;
-//    }
-//
-//    @Override
-//    public int getItemViewType(int position) {
-//        return position;
-//    }
+    @SuppressLint("NotifyDataSetChanged")
+    public void searchFilter(String query) {
+        cartFoodsList.clear();
+        if (query.trim().isEmpty()) {
+            cartFoodsList.addAll(filterCartFoods);
+        } else {
+            query = query.toLowerCase(new Locale("tr", "TR"));
+            for (CartFoods cartFood : filterCartFoods) {
+                if (normalizeString(cartFood.getYemek_adi()).contains(normalizeString(query))) {
+                    cartFoodsList.add(cartFood);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    private String normalizeString(String input) {
+        return Normalizer.normalize(input, Normalizer.Form.NFD)
+                .replaceAll("\\p{M}", "")
+                .toLowerCase(new Locale("tr", "TR"));
+    }
+    @Override
+    public long getItemId(int position) {
+
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 
     @Override
     public int getItemCount() {

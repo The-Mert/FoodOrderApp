@@ -1,6 +1,7 @@
 package com.example.fooddelivery.ui.fragment;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 
@@ -21,16 +22,13 @@ import android.widget.SearchView;
 
 
 import com.example.fooddelivery.R;
-import com.example.fooddelivery.data.entity.CartFoods;
 import com.example.fooddelivery.data.entity.Foods;
-import com.example.fooddelivery.data.entity.Recommended;
 import com.example.fooddelivery.databinding.FragmentMainPageBinding;
-import com.example.fooddelivery.ui.adapter.CartAdapter;
 import com.example.fooddelivery.ui.adapter.OrdersAdapter;
 import com.example.fooddelivery.ui.adapter.RecommendedAdapter;
 import com.example.fooddelivery.ui.viewmodel.MainPageViewModel;
 
-import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -39,6 +37,7 @@ public class MainPageFragment extends Fragment {
     private FragmentMainPageBinding binding;
     private MainPageViewModel viewModel;
     private int amount;
+    private SharedPreferences sharedPreferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,14 +67,31 @@ public class MainPageFragment extends Fragment {
         viewModel.ordersList.observe(getViewLifecycleOwner(),ordersList -> {
             OrdersAdapter adapter1 = new OrdersAdapter(ordersList,requireContext(),viewModel);
             binding.orderRv.setAdapter(adapter1);
-            int sum_price = 0;
+            AtomicInteger sum_price = new AtomicInteger();
+
+            binding.mainPageSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    adapter1.searchFilter(query);
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    adapter1.searchFilter(newText);
+                    return false;
+                }
+            });
+
             adapter1.amount.observe(getViewLifecycleOwner(),s->{
                 this.amount = s;
+                binding.textViewCartAmount.setText(s + " item");
+                for (Foods orderFoods : ordersList) {
+                    sum_price.addAndGet((orderFoods.getYemek_fiyat() * s));
+                }
             });
-            for (Foods orderFoods : ordersList) {
-                sum_price += (orderFoods.getYemek_fiyat() * this.amount);
-            }
-            binding.buttonCartPage.setText(String.valueOf(sum_price));
+
+            binding.buttonCartPage.setText(sum_price.get() + "₺");
         });
         // ------------------
 

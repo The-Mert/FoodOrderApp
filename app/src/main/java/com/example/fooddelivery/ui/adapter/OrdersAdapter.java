@@ -1,5 +1,6 @@
 package com.example.fooddelivery.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,25 +22,26 @@ import com.example.fooddelivery.ui.fragment.MainPageFragmentDirections;
 import com.example.fooddelivery.ui.viewmodel.CartViewModel;
 import com.example.fooddelivery.ui.viewmodel.MainPageViewModel;
 
+import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MainMenuCardHolding> {
     private List<Foods> foodsList;
-    private Context context;
-    private MainPageViewModel viewModel;
+    private List<Foods> filterFoods;
+    private final Context context;
+    private final MainPageViewModel viewModel;
 
     public MutableLiveData<Integer> amount = new MutableLiveData<>(0);
 
 
 
-    public OrdersAdapter() {
-    }
-
     public OrdersAdapter(List<Foods> foodsList, Context context, MainPageViewModel viewModel) {
         this.foodsList = foodsList;
         this.context = context;
         this.viewModel = viewModel;
-
+        this.filterFoods = new ArrayList<>(foodsList);
     }
 
     @NonNull
@@ -101,6 +103,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MainMenuCa
         });
         //-----------
 
+
+
         //Add Cart
         m.imageButtonAddCart.setOnClickListener(v -> {
             String yemek_adi = foods.getYemek_adi();
@@ -123,6 +127,27 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MainMenuCa
 
         });
 
+    }
+    @SuppressLint("NotifyDataSetChanged")
+    public void searchFilter(String query) {
+        foodsList.clear();
+        if (query.trim().isEmpty()) {
+            foodsList.addAll(filterFoods);
+        } else {
+            query = query.toLowerCase(new Locale("tr", "TR"));
+            for (Foods food : filterFoods) {
+                if (normalizeString(food.getYemek_adi()).contains(normalizeString(query))) {
+                    foodsList.add(food);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    private String normalizeString(String input) {
+        return Normalizer.normalize(input, Normalizer.Form.NFD)
+                .replaceAll("\\p{M}", "")
+                .toLowerCase(new Locale("tr", "TR"));
     }
 
     @Override

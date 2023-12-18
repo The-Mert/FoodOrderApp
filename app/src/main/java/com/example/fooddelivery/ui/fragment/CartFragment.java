@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.SearchView;
 
 
 import com.example.fooddelivery.R;
@@ -28,6 +29,9 @@ import com.example.fooddelivery.ui.adapter.CartAdapter;
 
 import com.example.fooddelivery.ui.viewmodel.CartViewModel;
 
+import java.util.Collections;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
@@ -37,6 +41,7 @@ public class CartFragment extends Fragment {
 
 
     public MutableLiveData<String> priceToMain = new MutableLiveData<>("0");
+
 
     @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
     @Override
@@ -57,23 +62,62 @@ public class CartFragment extends Fragment {
         viewModelCart.cartFoods.observe(getViewLifecycleOwner(),cartFoods -> {
             CartAdapter adapter1 = new CartAdapter(cartFoods,requireContext(),viewModelCart);
             binding.cartRv.setAdapter(adapter1);
-            int sum_price = cartFoods.stream().mapToInt(cartFoods1 ->
-                    (cartFoods1.getYemek_fiyat() * cartFoods1.getYemek_siparis_adet())).sum();
+            AtomicInteger sum_price = new AtomicInteger(cartFoods.stream().mapToInt(cartFoods1 ->
+                    (cartFoods1.getYemek_fiyat() * cartFoods1.getYemek_siparis_adet())).sum());
+
+            binding.deleteAll.setOnClickListener(s->{
+                while(cartFoods.size()>0){
+                for(CartFoods cartFoods1 : cartFoods){
+                    viewModelCart.delete(cartFoods1.getSepet_yemek_id(),"mert_yazici");
+                }
+                cartFoods.clear();
+                Log.e("SizeFood:",cartFoods.size() + "");
+                }
+                adapter1.notifyDataSetChanged();
+                adapter1.isEmpty.observe(getViewLifecycleOwner(),isEmpty->{
+                    if(isEmpty || cartFoods.size()==0){
+                        binding.textViewDeliveryPrice.setText("");
+                        binding.textViewDeliveryText.setText("");
+                        binding.textViewTotal.setText( 0 + "₺" );
+                    }else{
+                        sum_price.addAndGet(10);
+                        binding.textViewDeliveryPrice.setText("10₺");
+                        binding.textViewDeliveryText.setText("Delivery Fee");
+                        binding.textViewTotal.setText( sum_price.get() + "₺" );
+                    }
+                });
+            });
+            binding.mainPageSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    adapter1.searchFilter(query);
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    adapter1.searchFilter(newText);
+                    return false;
+                }
+            });
 
             adapter1.isEmpty.observe(getViewLifecycleOwner(),isEmpty->{
-                if(isEmpty){
+                if(isEmpty || cartFoods.size()==0){
+                    binding.textViewDeliveryPrice.setText("");
+                    binding.textViewDeliveryText.setText("");
                     binding.textViewTotal.setText( 0 + "₺" );
                 }else{
-                    binding.textViewTotal.setText( sum_price + "₺" );
+                    sum_price.addAndGet(10);
+                    binding.textViewDeliveryPrice.setText("10₺");
+                    binding.textViewDeliveryText.setText("Delivery Fee");
+                    binding.textViewTotal.setText( sum_price.get() + "₺" );
                 }
-//                Log.e("Sonuç:",isEmpty+"");
             });
 
 
         });
         // ------------------
 
-        //Send Price Data to MainPage
 
 
         //Nav and Status Bar Hide
