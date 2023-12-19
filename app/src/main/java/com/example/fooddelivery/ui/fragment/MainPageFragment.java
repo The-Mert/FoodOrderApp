@@ -1,10 +1,13 @@
 package com.example.fooddelivery.ui.fragment;
 
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -12,7 +15,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +24,6 @@ import android.widget.SearchView;
 
 
 import com.example.fooddelivery.R;
-import com.example.fooddelivery.data.entity.Foods;
 import com.example.fooddelivery.databinding.FragmentMainPageBinding;
 import com.example.fooddelivery.ui.adapter.OrdersAdapter;
 import com.example.fooddelivery.ui.adapter.RecommendedAdapter;
@@ -36,17 +37,13 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class MainPageFragment extends Fragment {
     private FragmentMainPageBinding binding;
     private MainPageViewModel viewModel;
-    private int amount;
-    private SharedPreferences sharedPreferences;
 
+    @SuppressLint("CommitPrefEdits")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentMainPageBinding.inflate(inflater,container,false);
 
-        CartFragment fragment = new CartFragment();
-        String total = fragment.priceToMain.getValue();
-        Log.e("totalPrice:", total);
 
 
         //Recommended RV
@@ -84,11 +81,10 @@ public class MainPageFragment extends Fragment {
             });
 
             adapter1.amount.observe(getViewLifecycleOwner(),s->{
-                this.amount = s;
-                binding.textViewCartAmount.setText(s + " item");
-                for (Foods orderFoods : ordersList) {
-                    sum_price.addAndGet((orderFoods.getYemek_fiyat() * s));
-                }
+
+
+                binding.textViewCartAmount.setText( s+ " item");
+
             });
 
             binding.buttonCartPage.setText(sum_price.get() + "₺");

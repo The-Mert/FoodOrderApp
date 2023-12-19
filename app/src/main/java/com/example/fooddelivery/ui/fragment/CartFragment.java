@@ -40,8 +40,6 @@ public class CartFragment extends Fragment {
     private CartViewModel viewModelCart;
 
 
-    public MutableLiveData<String> priceToMain = new MutableLiveData<>("0");
-
 
     @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
     @Override
@@ -71,7 +69,6 @@ public class CartFragment extends Fragment {
                     viewModelCart.delete(cartFoods1.getSepet_yemek_id(),"mert_yazici");
                 }
                 cartFoods.clear();
-                Log.e("SizeFood:",cartFoods.size() + "");
                 }
                 adapter1.notifyDataSetChanged();
                 adapter1.isEmpty.observe(getViewLifecycleOwner(),isEmpty->{

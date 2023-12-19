@@ -104,7 +104,6 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MainMenuCa
         //-----------
 
 
-
         //Add Cart
         m.imageButtonAddCart.setOnClickListener(v -> {
             String yemek_adi = foods.getYemek_adi();
@@ -123,7 +122,26 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MainMenuCa
 
         m.imageViewFoodMainPage.setOnClickListener(v -> {       // Path to Details Fragment
             MainPageFragmentDirections.PathDetails pathDetails = MainPageFragmentDirections.pathDetails(foods);
-            Navigation.findNavController(v).navigate(R.id.pathDetails);
+//            Log.e("Tıklandı","tıklandı");
+            Navigation.findNavController(v).navigate(pathDetails);
+
+        });
+        m.textViewFoodNameMainPage.setOnClickListener(v -> {       // Path to Details Fragment
+            MainPageFragmentDirections.PathDetails pathDetails = MainPageFragmentDirections.pathDetails(foods);
+//            Log.e("Tıklandı","tıklandı");
+            Navigation.findNavController(v).navigate(pathDetails);
+
+        });
+        m.textViewFoodTypeMainPage.setOnClickListener(v -> {       // Path to Details Fragment
+            MainPageFragmentDirections.PathDetails pathDetails = MainPageFragmentDirections.pathDetails(foods);
+//            Log.e("Tıklandı","tıklandı");
+            Navigation.findNavController(v).navigate(pathDetails);
+
+        });
+        m.textViewPriceMainPage.setOnClickListener(v -> {       // Path to Details Fragment
+            MainPageFragmentDirections.PathDetails pathDetails = MainPageFragmentDirections.pathDetails(foods);
+//            Log.e("Tıklandı","tıklandı");
+            Navigation.findNavController(v).navigate(pathDetails);
 
         });
 

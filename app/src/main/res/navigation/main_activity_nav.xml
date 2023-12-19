@@ -52,12 +52,13 @@
         <action
             android:id="@+id/pathDetailsToCart"
             app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/pathDetailsToMain"
+            app:destination="@id/mainPageFragment" />
         <argument
             android:name="food"
-            app:argType="com.example.fooddelivery.data.entity.Foods" />
-        <action
-            android:id="@+id/action_detailsFragment_to_mainPageFragment"
-            app:destination="@id/mainPageFragment" />
+            app:argType="com.example.fooddelivery.data.entity.Foods"
+            app:nullable="false" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"

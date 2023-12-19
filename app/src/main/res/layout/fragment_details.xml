@@ -1,6 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.DetailsFragment" />
+    tools:context=".ui.fragment.DetailsFragment">
+
+    <ImageButton
+        android:id="@+id/imageButtonFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#FFFFFF"
+        android:src="@drawable/favorite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/buttonBackToMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#FFFFFF"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViiewScoreMainPage2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="64dp"
+        android:drawableLeft="@drawable/star"
+        android:fontFamily="@font/lato_bold"
+        android:text="4,5"
+        android:textColor="#B1A53A"
+        android:textColorHighlight="#FFEB3B"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textViewFoodNameDetail"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <ImageButton
+        android:id="@+id/imageButtonAddCart2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/login_signup"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCartPage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/cart" />
+
+    <TextView
+        android:id="@+id/textViewAmountMainPage3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonIncreaseMainPage3"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonIncreaseMainPage3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageButtonDecreaseMainPage3"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonIncreaseMainPage3" />
+
+    <ImageButton
+        android:id="@+id/imageButtonIncreaseMainPage3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="48dp"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/imageButtonAddCart2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textViewAmountMainPage3"
+        app:srcCompat="@drawable/plus" />
+
+    <ImageButton
+        android:id="@+id/imageButtonDecreaseMainPage3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonIncreaseMainPage3"
+        app:layout_constraintEnd_toStartOf="@+id/textViewAmountMainPage3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/minus" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textViewFoodNameDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Et"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViiewScoreMainPage2"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />
+
+    <TextView
+        android:id="@+id/textViewPriceDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:text="Total Price: 22"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAmountMainPage3"
+        app:layout_constraintEnd_toEndOf="@+id/textViewAmountMainPage3"
+        app:layout_constraintStart_toStartOf="@+id/textViewAmountMainPage3" />
+
+    <ImageButton
+        android:id="@+id/imageButtonLikeCartPage2"
+        android:layout_width="36dp"
+        android:layout_height="31dp"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:srcCompat="@drawable/heart"
+        app:tint="@android:color/darker_gray" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="165dp" />
+
+    <Button
+        android:id="@+id/buttonCartPage"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:background="@drawable/button_shape_cart"
+        android:drawableLeft="@drawable/cart"
+        android:gravity="end|center"
+        android:text="20$"
+        android:textSize="20dp"
+        app:backgroundTint="@color/login_signup"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
