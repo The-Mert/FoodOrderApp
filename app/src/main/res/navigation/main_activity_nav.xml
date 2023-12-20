@@ -19,6 +19,9 @@
         <action
             android:id="@+id/pathFromMainToLogin"
             app:destination="@id/logInFragment" />
+        <action
+            android:id="@+id/pathMainToFav"
+            app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
@@ -57,8 +60,10 @@
             app:destination="@id/mainPageFragment" />
         <argument
             android:name="food"
-            app:argType="com.example.fooddelivery.data.entity.Foods"
-            app:nullable="false" />
+            app:argType="com.example.fooddelivery.data.entity.Foods" />
+        <action
+            android:id="@+id/pathDetailsToFav"
+            app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -71,6 +76,9 @@
         <action
             android:id="@+id/backFromCartToMain"
             app:destination="@id/mainPageFragment" />
+        <action
+            android:id="@+id/pathCartToFav"
+            app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/paymentFragment"
@@ -82,4 +90,9 @@
         android:name="com.example.fooddelivery.ui.fragment.CommentFragment"
         android:label="fragment_comment"
         tools:layout="@layout/fragment_comment" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.fooddelivery.ui.fragment.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
 </navigation>

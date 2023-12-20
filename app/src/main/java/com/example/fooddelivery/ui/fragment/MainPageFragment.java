@@ -54,7 +54,6 @@ public class MainPageFragment extends Fragment {
             binding.recommendedRv.setAdapter(adapter);
 
 
-
         });
         //-------------------
 
@@ -100,6 +99,9 @@ public class MainPageFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.pathFromMainToLogin);
         });
 
+        binding.imageButtonMainToFav.setOnClickListener(v->{
+            Navigation.findNavController(v).navigate(R.id.pathMainToFav);
+        });
 
 
         Window w = getActivity().getWindow();

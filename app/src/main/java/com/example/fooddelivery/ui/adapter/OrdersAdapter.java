@@ -32,6 +32,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MainMenuCa
     private List<Foods> filterFoods;
     private final Context context;
     private final MainPageViewModel viewModel;
+    private boolean pressed = false;
 
     public MutableLiveData<Integer> amount = new MutableLiveData<>(0);
 
@@ -102,6 +103,10 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MainMenuCa
             }
         });
         //-----------
+//
+//        m.imageButtonLikeMainPage.setOnClickListener(v -> {
+//            m.imageButtonLikeMainPage.
+//        });
 
 
         //Add Cart
@@ -122,25 +127,21 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MainMenuCa
 
         m.imageViewFoodMainPage.setOnClickListener(v -> {       // Path to Details Fragment
             MainPageFragmentDirections.PathDetails pathDetails = MainPageFragmentDirections.pathDetails(foods);
-//            Log.e("Tıklandı","tıklandı");
             Navigation.findNavController(v).navigate(pathDetails);
 
         });
         m.textViewFoodNameMainPage.setOnClickListener(v -> {       // Path to Details Fragment
             MainPageFragmentDirections.PathDetails pathDetails = MainPageFragmentDirections.pathDetails(foods);
-//            Log.e("Tıklandı","tıklandı");
             Navigation.findNavController(v).navigate(pathDetails);
 
         });
         m.textViewFoodTypeMainPage.setOnClickListener(v -> {       // Path to Details Fragment
             MainPageFragmentDirections.PathDetails pathDetails = MainPageFragmentDirections.pathDetails(foods);
-//            Log.e("Tıklandı","tıklandı");
             Navigation.findNavController(v).navigate(pathDetails);
 
         });
         m.textViewPriceMainPage.setOnClickListener(v -> {       // Path to Details Fragment
             MainPageFragmentDirections.PathDetails pathDetails = MainPageFragmentDirections.pathDetails(foods);
-//            Log.e("Tıklandı","tıklandı");
             Navigation.findNavController(v).navigate(pathDetails);
 
         });
@@ -166,6 +167,10 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MainMenuCa
         return Normalizer.normalize(input, Normalizer.Form.NFD)
                 .replaceAll("\\p{M}", "")
                 .toLowerCase(new Locale("tr", "TR"));
+    }
+
+    private void isPressed(boolean pressed){
+        this.pressed = pressed;
     }
 
     @Override

@@ -152,4 +152,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewCartAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="190dp"
+        android:text="3 items"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonCartPage"
+        app:layout_constraintTop_toTopOf="@+id/buttonCartPage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

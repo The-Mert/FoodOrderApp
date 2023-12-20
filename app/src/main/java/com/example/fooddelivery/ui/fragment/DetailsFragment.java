@@ -64,6 +64,22 @@ public class DetailsFragment extends Fragment {
             detailsViewModel.addCart(yemek_adi,yemek_resim_adi,yemek_fiyat,yemek_siparis_adet,kullanici_adi);
         });
 
+        binding.imageButtonIncreaseMainPage3.setOnClickListener(v -> {
+            String food_amount_str_before = binding.textViewAmountMainPage3.getText().toString();
+            int food_amount_int = Integer.parseInt(food_amount_str_before);
+            food_amount_int ++;
+            String food_amount = String.valueOf(food_amount_int);
+            binding.textViewAmountMainPage3.setText(food_amount);
+        });
+        binding.imageButtonDecreaseMainPage3.setOnClickListener(v -> {
+            String food_amount_str_before = binding.textViewAmountMainPage3.getText().toString();
+            int food_amount_int = Integer.parseInt(food_amount_str_before);
+            if (food_amount_int>0) {
+                food_amount_int--;
+                String food_amount = String.valueOf(food_amount_int);
+                binding.textViewAmountMainPage3.setText(food_amount);
+            }
+        });
 
 
         Window w = getActivity().getWindow();
