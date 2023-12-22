@@ -8,13 +8,31 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0.0px"
+        android:elevation="8dp"
+        app:cardBackgroundColor="#FF9800"
+        app:cardCornerRadius="65dp"
+        app:cardPreventCornerOverlap="false">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:paddingBottom="10dp">
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0.0px"
+            android:elevation="8dp"
+            android:paddingBottom="10dp"
+            app:cardElevation="10dp"
+            app:cardPreventCornerOverlap="false">
 
             <TextView
                 android:id="@+id/textViewPriceMainPage"
@@ -34,8 +52,8 @@
                 android:drawableLeft="@drawable/star"
                 android:fontFamily="@font/lato_bold"
                 android:text="4,5"
-                android:textColor="#B1A53A"
-                android:textColorHighlight="#FFEB3B"
+                android:textColor="#F3ECB5"
+                android:textColorHighlight="#EDE8BA"
                 android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@+id/textViewFoodTypeMainPage"
                 app:layout_constraintTop_toTopOf="@+id/textViewFoodTypeMainPage" />
@@ -69,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
@@ -102,6 +120,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
                 android:backgroundTint="#FFFFFF"
+                app:circularflow_radiusInDP="70dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@drawable/plus" />

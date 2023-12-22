@@ -5,8 +5,10 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "log")
-public class Login {
+public class Login implements Serializable {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "person_id")
     @NonNull

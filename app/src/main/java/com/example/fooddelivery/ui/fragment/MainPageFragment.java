@@ -38,6 +38,7 @@ public class MainPageFragment extends Fragment {
     private FragmentMainPageBinding binding;
     private MainPageViewModel viewModel;
 
+
     @SuppressLint("CommitPrefEdits")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -45,17 +46,6 @@ public class MainPageFragment extends Fragment {
         binding = FragmentMainPageBinding.inflate(inflater,container,false);
 
 
-
-        //Recommended RV
-        binding.recommendedRv.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.HORIZONTAL));
-
-        viewModel.recommendedList.observe(getViewLifecycleOwner(),recommendedList -> {
-            RecommendedAdapter adapter = new RecommendedAdapter(recommendedList,requireContext(),viewModel);
-            binding.recommendedRv.setAdapter(adapter);
-
-
-        });
-        //-------------------
 
         //Orders Now RV
         binding.orderRv.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -96,7 +86,7 @@ public class MainPageFragment extends Fragment {
         });
 
         binding.imageButtonLogOut.setOnClickListener(v -> {
-            Navigation.findNavController(v).navigate(R.id.pathFromMainToLogin);
+            Navigation.findNavController(v).navigate(R.id.pathMainToProfile);
         });
 
         binding.imageButtonMainToFav.setOnClickListener(v->{

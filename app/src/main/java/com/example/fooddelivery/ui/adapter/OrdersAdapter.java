@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.fooddelivery.R;
 import com.example.fooddelivery.data.entity.CartFoods;
 import com.example.fooddelivery.data.entity.Foods;
+import com.example.fooddelivery.data.entity.Login;
 import com.example.fooddelivery.data.repo.FoodsDaoRepository;
 import com.example.fooddelivery.databinding.MainMenuCardBinding;
 import com.example.fooddelivery.ui.fragment.MainPageFragment;
@@ -32,8 +34,6 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MainMenuCa
     private List<Foods> filterFoods;
     private final Context context;
     private final MainPageViewModel viewModel;
-    private boolean pressed = false;
-
     public MutableLiveData<Integer> amount = new MutableLiveData<>(0);
 
 
@@ -102,11 +102,16 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MainMenuCa
             m.textViewAmountMainPage.setText(food_amount);
             }
         });
-        //-----------
-//
-//        m.imageButtonLikeMainPage.setOnClickListener(v -> {
-//            m.imageButtonLikeMainPage.
-//        });
+
+        m.imageButtonLikeMainPage.setOnClickListener(v -> {
+
+                m.imageButtonLikeMainPage.setColorFilter(ContextCompat.getColor(context, R.color.login_signup));
+                String food_name = foods.getYemek_adi();
+                String img_name = foods.getYemek_resim_adi();
+                String food_price = foods.getYemek_fiyat() + "₺";
+                viewModel.addFav("mertyzc_reveiced@hotmail.com", "mert", "123456", food_name, img_name, food_price, "mert_yazici");
+
+        });
 
 
         //Add Cart
@@ -126,22 +131,26 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MainMenuCa
         //-----------
 
         m.imageViewFoodMainPage.setOnClickListener(v -> {       // Path to Details Fragment
-            MainPageFragmentDirections.PathDetails pathDetails = MainPageFragmentDirections.pathDetails(foods);
+            Login login = new Login();
+            MainPageFragmentDirections.PathDetails pathDetails = MainPageFragmentDirections.pathDetails(foods,login);
             Navigation.findNavController(v).navigate(pathDetails);
 
         });
         m.textViewFoodNameMainPage.setOnClickListener(v -> {       // Path to Details Fragment
-            MainPageFragmentDirections.PathDetails pathDetails = MainPageFragmentDirections.pathDetails(foods);
+            Login login = new Login();
+            MainPageFragmentDirections.PathDetails pathDetails = MainPageFragmentDirections.pathDetails(foods,login);
             Navigation.findNavController(v).navigate(pathDetails);
 
         });
         m.textViewFoodTypeMainPage.setOnClickListener(v -> {       // Path to Details Fragment
-            MainPageFragmentDirections.PathDetails pathDetails = MainPageFragmentDirections.pathDetails(foods);
+            Login login = new Login();
+            MainPageFragmentDirections.PathDetails pathDetails = MainPageFragmentDirections.pathDetails(foods,login);
             Navigation.findNavController(v).navigate(pathDetails);
 
         });
         m.textViewPriceMainPage.setOnClickListener(v -> {       // Path to Details Fragment
-            MainPageFragmentDirections.PathDetails pathDetails = MainPageFragmentDirections.pathDetails(foods);
+            Login login = new Login();
+            MainPageFragmentDirections.PathDetails pathDetails = MainPageFragmentDirections.pathDetails(foods,login);
             Navigation.findNavController(v).navigate(pathDetails);
 
         });
@@ -169,9 +178,6 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MainMenuCa
                 .toLowerCase(new Locale("tr", "TR"));
     }
 
-    private void isPressed(boolean pressed){
-        this.pressed = pressed;
-    }
 
     @Override
     public int getItemCount() {

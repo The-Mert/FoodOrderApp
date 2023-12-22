@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
@@ -37,10 +38,16 @@ public class FavoriteFragment extends Fragment {
         favoriteViewModel.favoritesList.observe(getViewLifecycleOwner(),favList ->{
             FavoritesAdapter adapter = new FavoritesAdapter(favList,requireContext(),favoriteViewModel);
             binding.favRv.setAdapter(adapter);
-            Log.e("veritabancerik:",favList.size() + "");
 
         });
         //---------------------
+
+        binding.buttonCartPage.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.pathFavToCart);
+        });
+        binding.imageButtonFavToHome.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.pathFavToMain);
+        });
 
         return binding.getRoot();
     }
@@ -49,5 +56,11 @@ public class FavoriteFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         favoriteViewModel = new ViewModelProvider(this).get(FavoriteViewModel.class);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        favoriteViewModel.showFavRv();
     }
 }

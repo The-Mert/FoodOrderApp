@@ -4,17 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:circularflow_radiusInDP="8dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0.0px"
+        android:elevation="8dp"
+        android:paddingBottom="100dp"
+        app:cardBackgroundColor="#FF9800"
+        app:cardCornerRadius="50dp"
+        app:cardPreventCornerOverlap="false">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:paddingBottom="10dp">
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0.0px"
+            android:elevation="8dp"
+            android:paddingBottom="10dp"
+            app:cardElevation="10dp"
+            app:cardPreventCornerOverlap="false">
 
             <TextView
                 android:id="@+id/textViewPriceCartPage"
@@ -33,13 +51,11 @@
                 android:drawableLeft="@drawable/star"
                 android:fontFamily="@font/lato_bold"
                 android:text="4,5"
-                android:textColor="#B1A53A"
+                android:textColor="#F3ECB5"
                 android:textColorHighlight="#FFEB3B"
                 android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@+id/textViewFoodTypeCartPage"
-                app:layout_constraintTop_toTopOf="@+id/textViewFoodTypeCartPage"
-                tools:layout_editor_absoluteX="204dp"
-                tools:layout_editor_absoluteY="70dp" />
+                app:layout_constraintTop_toTopOf="@+id/textViewFoodTypeCartPage" />
 
             <TextView
                 android:id="@+id/textViewFoodNameCartPage"
@@ -69,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
@@ -100,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:backgroundTint="#FBFBFB"
+                android:backgroundTint="#0B0A0A"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@drawable/trash" />

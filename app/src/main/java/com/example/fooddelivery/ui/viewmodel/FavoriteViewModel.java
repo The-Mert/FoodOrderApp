@@ -31,7 +31,11 @@ public class FavoriteViewModel extends ViewModel {
         favdao.showFavorites();
     }
 
-//    public void addFav(){
-//
-//    }
+    public void addFav(String email,String username,String password,String food_name,String img_name,String food_amount,String owner_name){
+        favdao.saveFavorite(email,username,password,food_name,img_name,food_amount,owner_name);
+    }
+
+    public void deleteFav(int person_id){
+        favdao.delteFavorite(person_id);
+    }
 }

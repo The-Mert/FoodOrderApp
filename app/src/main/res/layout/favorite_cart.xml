@@ -2,13 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0.0px"
+        android:elevation="8dp"
+        android:paddingBottom="100dp"
+        app:cardBackgroundColor="#FF9800"
+        app:cardCornerRadius="50dp"
+        app:cardPreventCornerOverlap="false">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,8 +34,8 @@
                 android:text="8 $"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewFoodFav"
-                app:layout_constraintTop_toBottomOf="@+id/imageButtonDeleteFav"
-                tools:layout_editor_absoluteX="311dp" />
+                app:layout_constraintEnd_toStartOf="@+id/imageButtonDeleteFav"
+                app:layout_constraintTop_toBottomOf="@+id/imageButtonDeleteFav" />
 
             <TextView
                 android:id="@+id/textViiewScoreFav"
@@ -35,7 +45,7 @@
                 android:drawableLeft="@drawable/star"
                 android:fontFamily="@font/lato_bold"
                 android:text="4,5"
-                android:textColor="#B1A53A"
+                android:textColor="#F3ECB5"
                 android:textColorHighlight="#FFEB3B"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/textViewFoodNameFav"

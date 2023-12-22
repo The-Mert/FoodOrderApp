@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.view.WindowManager;
 import com.bumptech.glide.Glide;
 import com.example.fooddelivery.R;
 import com.example.fooddelivery.data.entity.Foods;
+import com.example.fooddelivery.data.entity.Login;
 import com.example.fooddelivery.databinding.FragmentDetailsBinding;
 import com.example.fooddelivery.ui.viewmodel.DetailsViewModel;
 import com.example.fooddelivery.ui.viewmodel.MainPageViewModel;
@@ -39,6 +41,9 @@ public class DetailsFragment extends Fragment {
         DetailsFragmentArgs bundle = DetailsFragmentArgs.fromBundle(getArguments());
         Foods food = bundle.getFood();
 
+        Login login = bundle.getFavorite();
+        Log.e("loginsonuc",login.getFood_name() + " boş" );
+
         binding.textViewFoodNameDetail.setText(food.getYemek_adi());
         binding.textViewPriceDetail.setText("Total Price: "+ food.getYemek_fiyat() +  "₺");
 
@@ -52,6 +57,7 @@ public class DetailsFragment extends Fragment {
         });
 
         binding.imageButtonAddCart2.setOnClickListener(v->{
+
             String yemek_adi = food.getYemek_adi();
             String yemek_resim_adi = food.getYemek_resim_adi();
             int yemek_fiyat = food.getYemek_fiyat();

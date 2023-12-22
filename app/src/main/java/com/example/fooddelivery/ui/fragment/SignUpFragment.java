@@ -9,14 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fooddelivery.R;
+import com.example.fooddelivery.databinding.FragmentSignUpBinding;
 
 
 public class SignUpFragment extends Fragment {
-
+    private FragmentSignUpBinding binding;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        binding = FragmentSignUpBinding.inflate(inflater,container,false);
 
-        return inflater.inflate(R.layout.fragment_sign_up, container, false);
+
+
+        return binding.getRoot();
     }
 }
