@@ -8,6 +8,25 @@
     android:theme="@style/Theme.Design.NoActionBar"
     tools:context=".ui.fragment.MainPageFragment">
 
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="353dp"
+        tools:layout_editor_absoluteY="72dp" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:background="@color/searchview"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <SearchView
         android:id="@+id/mainPageSearch"
         android:layout_width="0dp"
@@ -19,7 +38,8 @@
         android:queryHint="Search Food"
         app:layout_constraintEnd_toStartOf="@+id/imageButtonLogOut"
         app:layout_constraintStart_toEndOf="@+id/imageButtonMainToFav"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        android:textColor="@color/searchview"/>
 
     <Button
         android:id="@+id/buttonCartPage"
@@ -27,8 +47,8 @@
         android:layout_height="75dp"
         android:background="@drawable/button_shape_cart"
         android:drawableLeft="@drawable/cart"
-        android:gravity="end|center"
-        android:text="20$"
+        android:gravity="center"
+        android:text="Cart"
         android:textSize="20dp"
         app:backgroundTint="@color/login_signup"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,23 +56,12 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewCartAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="190dp"
-        android:text="3 items"
-        android:textColor="#FFFFFF"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/buttonCartPage"
-        app:layout_constraintTop_toTopOf="@+id/buttonCartPage" />
-
     <ImageButton
         android:id="@+id/imageButtonLogOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#FFFFFF"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#212121"
         android:src="@drawable/profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
@@ -69,20 +78,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
         android:fontFamily="@font/lato_bold"
         android:text=" Order Now"
         android:textColor="#000000"
         android:textColorHint="#000000"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainPageSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/orderRv"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonCartPage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,9 +101,32 @@
         android:id="@+id/imageButtonMainToFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#FFFFFF"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="#212121"
         android:src="@drawable/favorite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Favorites"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonMainToFav"
+        app:layout_constraintStart_toStartOf="@+id/imageButtonMainToFav"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonMainToFav" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonLogOut"
+        app:layout_constraintStart_toStartOf="@+id/imageButtonLogOut"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonLogOut" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

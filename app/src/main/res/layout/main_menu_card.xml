@@ -17,8 +17,8 @@
         android:divider="@android:color/transparent"
         android:dividerHeight="0.0px"
         android:elevation="8dp"
-        app:cardBackgroundColor="#FF9800"
-        app:cardCornerRadius="65dp"
+        app:cardBackgroundColor="#ABABAB"
+        app:cardCornerRadius="15dp"
         app:cardPreventCornerOverlap="false">
 
 
@@ -80,7 +80,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/heart"
-                app:tint="@android:color/darker_gray" />
+                app:tint="@color/white" />
 
             <ImageView
                 android:id="@+id/imageViewFoodMainPage"

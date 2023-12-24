@@ -1,5 +1,8 @@
 package com.example.fooddelivery.ui.viewmodel;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -20,6 +23,7 @@ public class MainPageViewModel extends ViewModel {
     public FavoriteDaoRepository favdao;
     public MutableLiveData<List<Foods>> ordersList;
     public MutableLiveData<List<Recommended>> recommendedList;
+    private Context context;
 
     @Inject
     public MainPageViewModel(FoodsDaoRepository fdao,FavoriteDaoRepository favdao){
@@ -51,6 +55,7 @@ public class MainPageViewModel extends ViewModel {
         fdao.showCartRv(kullanici_adi);
 
     }
+
 
 
 

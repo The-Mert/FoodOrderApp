@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.CartFragment" >
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:background="@color/searchview"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/buttonCartPage2"
         android:layout_width="0dp"
@@ -25,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="#FFFFFF"
+        android:backgroundTint="@color/searchview"
         android:src="@drawable/favorite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/mainPageSearch" />
@@ -43,22 +54,44 @@
         app:layout_constraintStart_toEndOf="@+id/buttonBackCart"
         app:layout_constraintTop_toTopOf="@+id/buttonBackCart" />
 
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
     <ImageButton
         android:id="@+id/buttonBackCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:backgroundTint="#FFFFFF"
+        android:backgroundTint="@color/searchview"
         android:src="@drawable/home"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/deleteAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="-24dp"
+        android:backgroundTint="#390101"
+        android:gravity="top"
+        android:text="Remove All"
+        android:textSize="10sp"
+        app:cornerRadius="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/cartRv"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartRv"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toTopOf="@+id/textViewDeliveryText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,20 +138,25 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonCartPage2"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainPageSearch" />
-
-    <Button
-        android:id="@+id/deleteAll"
+    <TextView
+        android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete All"
+        android:text="Main Page"
+        android:textColor="#FFFFFF"
         android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/cartRv"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/buttonBackCart"
+        app:layout_constraintStart_toStartOf="@+id/buttonBackCart"
+        app:layout_constraintTop_toBottomOf="@+id/buttonBackCart" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Favorites"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton3"
+        app:layout_constraintStart_toStartOf="@+id/imageButton3"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

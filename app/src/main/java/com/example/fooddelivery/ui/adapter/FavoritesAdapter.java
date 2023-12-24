@@ -59,7 +59,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         Log.e("veritabanıiçerik:",login_position.getFood_name()+" "+login_position.getFood_amount());
 
         f.imageButtonDeleteFav.setOnClickListener(v->{
-            Snackbar.make(v,login_position.getFood_name()+" sure to delete?",Snackbar.LENGTH_SHORT)
+            Snackbar.make(v,"Do you really want to delete "+login_position.getFood_name()+" from favorites?",Snackbar.LENGTH_SHORT)
                     .setAction("YES",v1 -> {
                         favoriteViewModel.deleteFav(login_position.getPerson_id());
                         Snackbar.make(v1,login_position.getFood_name()+" has been deleted from favorites.", Snackbar.LENGTH_SHORT).show();

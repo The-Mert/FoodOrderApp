@@ -5,4 +5,5 @@
     <color name="statusbar_toolbar_login"></color>
     <color name="login_signup">#800000</color>
     <color name="plain_text_back">#D1D2D4</color>
+    <color name="searchview">#212121</color>
 </resources>

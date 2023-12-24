@@ -12,12 +12,14 @@
         android:layout_marginBottom="10dp"
         android:clipChildren="false"
         android:clipToPadding="false"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="0.0px"
         android:elevation="8dp"
         android:paddingBottom="100dp"
-        app:cardBackgroundColor="#FF9800"
-        app:cardCornerRadius="50dp"
+        app:cardBackgroundColor="#ABABAB"
+        app:cardCornerRadius="15dp"
         app:cardPreventCornerOverlap="false">
 
 

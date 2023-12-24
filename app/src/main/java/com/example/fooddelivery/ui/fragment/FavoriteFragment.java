@@ -32,7 +32,7 @@ public class FavoriteFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentFavoriteBinding.inflate(inflater,container,false);
 
-        //Fav Rv
+//        Fav Rv
         binding.favRv.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         favoriteViewModel.favoritesList.observe(getViewLifecycleOwner(),favList ->{
@@ -40,7 +40,7 @@ public class FavoriteFragment extends Fragment {
             binding.favRv.setAdapter(adapter);
 
         });
-        //---------------------
+//        ---------------------
 
         binding.buttonCartPage.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.pathFavToCart);

@@ -2,6 +2,8 @@
 package com.example.fooddelivery.ui.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -10,11 +12,15 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 import com.bumptech.glide.Glide;
 import com.example.fooddelivery.R;
@@ -37,6 +43,9 @@ public class DetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentDetailsBinding.inflate(inflater,container,false);
+
+
+
 
         DetailsFragmentArgs bundle = DetailsFragmentArgs.fromBundle(getArguments());
         Foods food = bundle.getFood();
@@ -68,6 +77,22 @@ public class DetailsFragment extends Fragment {
 //            amount.setValue(yemek_siparis_adet);
 
             detailsViewModel.addCart(yemek_adi,yemek_resim_adi,yemek_fiyat,yemek_siparis_adet,kullanici_adi);
+
+
+            @SuppressLint("InflateParams") View popupView = inflater.inflate(R.layout.add_cart_info, null);
+            int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+            int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+            boolean focusable = true;
+            final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+            popupWindow.showAtLocation(container, Gravity.CENTER, 0, 0);
+
+            popupView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    popupWindow.dismiss();
+                    return true;
+                }
+            });
         });
 
         binding.imageButtonIncreaseMainPage3.setOnClickListener(v -> {
@@ -85,6 +110,10 @@ public class DetailsFragment extends Fragment {
                 String food_amount = String.valueOf(food_amount_int);
                 binding.textViewAmountMainPage3.setText(food_amount);
             }
+        });
+
+        binding.imageButtonFavorite.setOnClickListener(v->{
+            Navigation.findNavController(v).navigate(R.id.pathDetailsToFav);
         });
 
 

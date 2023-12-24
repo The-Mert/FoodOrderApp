@@ -1,6 +1,8 @@
 package com.example.fooddelivery.ui.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -28,6 +30,7 @@ import com.example.fooddelivery.databinding.FragmentCartBinding;
 import com.example.fooddelivery.ui.adapter.CartAdapter;
 
 import com.example.fooddelivery.ui.viewmodel.CartViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -64,25 +67,42 @@ public class CartFragment extends Fragment {
                     (cartFoods1.getYemek_fiyat() * cartFoods1.getYemek_siparis_adet())).sum());
 
             binding.deleteAll.setOnClickListener(s->{
-                while(cartFoods.size()>0){
-                for(CartFoods cartFoods1 : cartFoods){
-                    viewModelCart.delete(cartFoods1.getSepet_yemek_id(),"mert_yazici");
-                }
-                cartFoods.clear();
-                }
-                adapter1.notifyDataSetChanged();
+
                 adapter1.isEmpty.observe(getViewLifecycleOwner(),isEmpty->{
-                    if(isEmpty || cartFoods.size()==0){
-                        binding.textViewDeliveryPrice.setText("");
-                        binding.textViewDeliveryText.setText("");
-                        binding.textViewTotal.setText( 0 + "₺" );
-                    }else{
-                        sum_price.addAndGet(10);
-                        binding.textViewDeliveryPrice.setText("10₺");
-                        binding.textViewDeliveryText.setText("Delivery Fee");
-                        binding.textViewTotal.setText( sum_price.get() + "₺" );
-                    }
+                    Snackbar.make(s,"Do you really want to clean the cart for good?",Snackbar.LENGTH_SHORT)
+                            .setAction("YES",v1 -> {
+                                while(cartFoods.size()>0){
+                                    for(CartFoods cartFoods1 : cartFoods){
+                                        viewModelCart.delete(cartFoods1.getSepet_yemek_id(),"mert_yazici");
+                                    }
+                                    cartFoods.clear();
+                                }
+                                adapter1.notifyDataSetChanged();
+                                if(isEmpty || cartFoods.size()==0){
+                                    binding.textViewDeliveryPrice.setText("");
+                                    binding.textViewDeliveryText.setText("");
+                                    binding.textViewTotal.setText( 0 + "₺" );
+
+                                }else{
+                                    sum_price.addAndGet(10);
+                                    binding.textViewDeliveryPrice.setText("10₺");
+                                    binding.textViewDeliveryText.setText("Delivery Fee");
+                                    binding.textViewTotal.setText( sum_price.get() + "₺" );
+
+                                }
+                                SharedPreferences sharedPreferences = requireContext().getSharedPreferences("Amount", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("amount",0 + " items in cart.");
+                                editor.putString("price", "Total:" + 0 + "₺");
+                                editor.apply();
+                                binding.deleteAll.setVisibility(View.INVISIBLE);
+//                                Snackbar.make(v1,login_position.getFood_name()+" has been deleted from favorites.", Snackbar.LENGTH_SHORT).show();
+                            })
+                            .show();
+
+
                 });
+
             });
             binding.mainPageSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override

@@ -2,6 +2,7 @@ package com.example.fooddelivery.ui.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,8 +33,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartMenuCardHo
     private List<CartFoods> filterCartFoods;
     private Context context;
     public MutableLiveData<Boolean> isEmpty = new MutableLiveData<>(false);
-
-    public MutableLiveData<String> itemAmount = new MutableLiveData<>("0");
 
     private CartViewModel viewModelCart;
 
@@ -93,6 +92,20 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartMenuCardHo
         c.textViewAmountCartPage.setText(String.valueOf(cartFoods.getYemek_siparis_adet()));
 
 
+        SharedPreferences sharedPreferences = context.getSharedPreferences("Amount", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+
+
+        int sum_amount = 0;
+        int sum_price = 0;
+        for(CartFoods cartFoods1 : cartFoodsList){
+            sum_amount += cartFoods1.getYemek_siparis_adet();
+            sum_price  += cartFoods1.getYemek_fiyat() *cartFoods1.getYemek_siparis_adet() ;
+            editor.putString("amount",sum_amount + " items in cart.");
+            editor.putString("price", "Total:" + (sum_price+10) + "₺");
+            editor.apply();
+        }
 
         c.imageButtonDelete.setOnClickListener(v -> {
             Snackbar.make(v,cartFoods.getYemek_adi()+" sure to delete?",Snackbar.LENGTH_SHORT)
@@ -103,7 +116,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartMenuCardHo
                         notifyItemRangeRemoved(position,cartFoodsList.size());
                         if (cartFoodsList.size() == 0){
                             isEmpty.setValue(Boolean.TRUE);
-                            Log.e("Sonuç:",isEmpty.getValue()+"");
+                                editor.putString("amount",0 + " items in cart.");
+                                editor.putString("price", "Total:" + 0 + "₺");
+                                editor.apply();
                         }
                     })
                     .show();

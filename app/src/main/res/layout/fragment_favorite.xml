@@ -4,7 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.FavoriteFragment" >
+    tools:context=".ui.fragment.FavoriteFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:background="@color/searchview"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonCartPage"
@@ -12,8 +23,8 @@
         android:layout_height="75dp"
         android:background="@drawable/button_shape_cart"
         android:drawableLeft="@drawable/cart"
-        android:gravity="end|center"
-        android:text="20$"
+        android:gravity="center"
+        android:text="Cart"
         android:textSize="20dp"
         app:backgroundTint="@color/login_signup"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,25 +32,13 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewCartAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="190dp"
-        android:text="3 items"
-        android:textColor="#FFFFFF"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/buttonCartPage"
-        app:layout_constraintTop_toTopOf="@+id/buttonCartPage" />
-
     <ImageButton
         android:id="@+id/imageButtonFavToHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:backgroundTint="#FFFFFF"
+        android:backgroundTint="@color/searchview"
         android:src="@drawable/home"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="#FFFFFF"
+        android:backgroundTint="@color/searchview"
         android:src="@drawable/profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageButtonFavToHome" />
@@ -58,9 +57,45 @@
         android:id="@+id/favRv"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonCartPage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Main Page"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonFavToHome"
+        app:layout_constraintStart_toStartOf="@+id/imageButtonFavToHome"
         app:layout_constraintTop_toBottomOf="@+id/imageButtonFavToHome" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:textColor="#FBFBFB"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonProfile"
+        app:layout_constraintStart_toStartOf="@+id/imageButtonProfile"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonProfile" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Favorites"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonProfile"
+        app:layout_constraintStart_toEndOf="@+id/imageButtonFavToHome"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonProfile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

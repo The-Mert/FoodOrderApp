@@ -10,11 +10,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +26,13 @@ import android.widget.SearchView;
 
 
 import com.example.fooddelivery.R;
+import com.example.fooddelivery.data.entity.CartFoods;
 import com.example.fooddelivery.databinding.FragmentMainPageBinding;
 import com.example.fooddelivery.ui.adapter.OrdersAdapter;
 import com.example.fooddelivery.ui.adapter.RecommendedAdapter;
 import com.example.fooddelivery.ui.viewmodel.MainPageViewModel;
 
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -38,13 +42,19 @@ public class MainPageFragment extends Fragment {
     private FragmentMainPageBinding binding;
     private MainPageViewModel viewModel;
 
-
-    @SuppressLint("CommitPrefEdits")
+    @SuppressLint({"CommitPrefEdits", "SetTextI18n"})
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentMainPageBinding.inflate(inflater,container,false);
 
+//        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("Amount", Context.MODE_PRIVATE);
+//        String data_amount = sharedPreferences.getString("amount", "2 items in cart.");
+//        String data_price = sharedPreferences.getString("price", "12₺");
+//
+//
+//        binding.textViewCartAmount.setText(data_amount);
+//        binding.buttonCartPage.setText(data_price);
 
 
         //Orders Now RV
@@ -53,7 +63,6 @@ public class MainPageFragment extends Fragment {
         viewModel.ordersList.observe(getViewLifecycleOwner(),ordersList -> {
             OrdersAdapter adapter1 = new OrdersAdapter(ordersList,requireContext(),viewModel);
             binding.orderRv.setAdapter(adapter1);
-            AtomicInteger sum_price = new AtomicInteger();
 
             binding.mainPageSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
@@ -69,16 +78,11 @@ public class MainPageFragment extends Fragment {
                 }
             });
 
-            adapter1.amount.observe(getViewLifecycleOwner(),s->{
-
-
-                binding.textViewCartAmount.setText( s+ " item");
-
-            });
-
-            binding.buttonCartPage.setText(sum_price.get() + "₺");
         });
         // ------------------
+
+
+
 
 
         binding.buttonCartPage.setOnClickListener(v -> {
@@ -112,7 +116,9 @@ public class MainPageFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
         viewModel.showOrderNow();
+        viewModel.showCartRv("mert_yazici");
 //        viewModel.showRecommended();
     }
 }

@@ -2,9 +2,14 @@ package com.example.fooddelivery.ui.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
+import android.content.SharedPreferences;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.PopupWindow;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -14,27 +19,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.fooddelivery.R;
-import com.example.fooddelivery.data.entity.CartFoods;
 import com.example.fooddelivery.data.entity.Foods;
 import com.example.fooddelivery.data.entity.Login;
-import com.example.fooddelivery.data.repo.FoodsDaoRepository;
 import com.example.fooddelivery.databinding.MainMenuCardBinding;
-import com.example.fooddelivery.ui.fragment.MainPageFragment;
 import com.example.fooddelivery.ui.fragment.MainPageFragmentDirections;
-import com.example.fooddelivery.ui.viewmodel.CartViewModel;
 import com.example.fooddelivery.ui.viewmodel.MainPageViewModel;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MainMenuCardHolding> {
     private List<Foods> foodsList;
     private List<Foods> filterFoods;
     private final Context context;
     private final MainPageViewModel viewModel;
-    public MutableLiveData<Integer> amount = new MutableLiveData<>(0);
+    public MutableLiveData<Integer> sumAmount = new MutableLiveData<>(0);
+    public MutableLiveData<Integer> dumPrice = new MutableLiveData<>(0);
+
 
 
 
@@ -110,9 +114,26 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MainMenuCa
                 String img_name = foods.getYemek_resim_adi();
                 String food_price = foods.getYemek_fiyat() + "₺";
                 viewModel.addFav("mertyzc_reveiced@hotmail.com", "mert", "123456", food_name, img_name, food_price, "mert_yazici");
+            @SuppressLint("InflateParams") View popupView = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.popup_favorites, null);
+            boolean focusable = true;
+            final PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT,focusable);
+
+            popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+
+            popupView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    popupWindow.dismiss();
+                    return true;
+                }
+            });
+
+
+
 
         });
-
+//        SharedPreferences sharedPreferencesOrder = context.getSharedPreferences("Order", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editorOrder = sharedPreferencesOrder.edit();
 
         //Add Cart
         m.imageButtonAddCart.setOnClickListener(v -> {
@@ -123,9 +144,31 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MainMenuCa
             int yemek_siparis_adet = Integer.parseInt(yemek_siparis_str);
             String kullanici_adi = "mert_yazici";
 
-            amount.setValue(yemek_siparis_adet);
-
             viewModel.addCart(yemek_adi,yemek_resim_adi,yemek_fiyat,yemek_siparis_adet,kullanici_adi);
+
+
+
+//                editorOrder.putInt("orderAmount",yemek_siparis_adet + sumAmount.getValue() );
+//                editorOrder.putInt("orderPrice", yemek_fiyat + dumPrice.getValue());
+
+
+
+
+            @SuppressLint("InflateParams") View popupView = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.add_cart_info, null);
+            boolean focusable = true;
+            final PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT,focusable);
+
+            popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+
+            popupView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    popupWindow.dismiss();
+                    return true;
+                }
+            });
+
+
 
         });
         //-----------
